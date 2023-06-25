@@ -1,0 +1,39 @@
+h1 {
+    background: green;
+
+}
+
+.paragraph-1{
+    background: blue;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-shadow: 1px 1px  green;
+}
+
+.paragraph-2{
+    border: 10px solid red;
+    border-radius: 20px;
+    font-size: 24px;
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    padding-left: 20px;
+    text-shadow: 1px 1px  green;
+}
+
+.paragraph-3{
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    text-align: center;
+    text-shadow: 1px 1px  green;
+
+}
+
+
+.paragraph-4{
+    font-size: 24px;
+    font-style: italic;
+    text-align: center;
+    text-shadow: 1px 1px  green;
+}
