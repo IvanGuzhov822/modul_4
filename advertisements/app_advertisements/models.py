@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib import admin
 from django.utils.html import format_html
-# Create your models here.
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 class Advertisement(models.Model):
+    image = models.ImageField('изображение', upload_to = 'advertisements/')
+    
     title = models.CharField('заголовок', max_length=128)
     
     description = models.TextField('описание')
@@ -16,6 +20,10 @@ class Advertisement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     updated_at = models.DateTimeField(auto_now=True)
+
+    user = models.ForeignKey(User, verbose_name= 'Пользователь', on_delete=models.CASCADE)
+
+
 
     class Meta:
         db_table = 'advertisements'
@@ -29,6 +37,11 @@ class Advertisement(models.Model):
             created_date = self.created_at.strftime("%H.%M.%S")
             return format_html('<span style = "color:green; font-weight: bold"> Сегодня в {} </span>', created_date)
         return self.created_at.strftime("%d.%m.%Y в %H.%M.%S")
+    
+    @admin.display(description= "ИЗОБРАЖЕНИЕ")
+    def get_html_image(self):
+        if self.image:
+            return format_html('<img src = "{}" style = "max-width:80px; max-height:80px"', self.image.url)
 
 
 
@@ -41,7 +54,7 @@ class Advertisement(models.Model):
             return format_html('<span style = "color:green; font-weight: bold"> Сегодня в {} </span>', created_date)
         return self.created_at.strftime("%d.%m.%Y в %H.%M.%S")
     def __str__(self):
-        return f'Advertisement(id = {self.id}, title = {self.title}, price = {self.price})'
+        return f'Advertisement(id = {self.id}, title = {self.title}, price = {self.price}, image = {self.image})'
     
 
 
