@@ -2,14 +2,14 @@
 
 {% load static %}
 
-{% block title %} Разместить обьявления {% endblock %}
+{% block title %} Регистрация {% endblock %}
 
 {% block content %}
 
 <!--Панель навигации-->
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
     <li class="nav-item">
-      <a class="nav-link" href="/">
+      <a class="nav-link" aria-current="page" href="{% url 'main-page' %}">
         <span style="font-weight: bold;">Главная</span>
       </a>
     </li>
@@ -18,50 +18,48 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'adv-post'%}">
+      <a class="nav-link" href="{% url 'adv-post'%}">
         <span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="register.html">
+      <a class="nav-link" href="{% url 'register'%}">
         <span style="font-weight: bold;">Регистрация</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="login.html">
+      <a class="nav-link active" href="{% url 'login' %}">
         <span style="font-weight: bold;">Войти</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="profile.html">
-        <span style="font-weight: bold;">Профиль</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <span style="font-weight: bold;">Выйти</span>
-      </a>
-    </li>
   </ul>
-
-<!--Приветствие-->
+  <div class="container">
   <div class="row">
-    <div class="col" style="margin: 50px;">
+    <div class="col-8" style="margin: 50px;">
       <div class="display-2">
-        <span class="badge bg-primary">Сообщите миру об этом в этой форме</span>
+        <span class="badge bg-primary">Страница авторизации пользователя</span>
       </div>
     </div>
   </div>
-
-<!--Контейнер-->
-  <div class="container">
-
-<!--Форма-->    
-    <form method="post" enctype="multipart/form-data">
+  {% if error %}
+    <div>{{error}}</div>
+  {% endif %}
+    <form method="post">
       {% csrf_token %}
       <div class="row mb-3">
         <div class="col">
-          {{ form.as_p }}
+          <label class="col-sm-4 col-form-label offset-4">Username</label>
+          <div class="col-sm-4 offset-4 w-25">
+            <input name = "username" type="text" class="form-control form-control-lg">
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="col-sm-4 col-form-label offset-4">Password</label>
+          <div class="col-sm-4 offset-4 w-25">
+            <input name="password" type="password" class="form-control form-control-lg">
+          </div>
         </div>
       </div>
       <div class="row mb-3 offset-sm-5">
@@ -73,5 +71,3 @@
   </div>
 
 {% endblock %}
-
-
